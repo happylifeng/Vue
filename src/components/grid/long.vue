@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Row type="flex" justify="center" class="code-row-bg">
+        <Row style="text-align:center;">
             <h1>
                 {{text}}
             </h1>
@@ -76,7 +76,7 @@
     export default {
         data() {
             return {
-                text: '欢迎光临'
+                text: '这是一个很长的页面'
             }
         }
     }
