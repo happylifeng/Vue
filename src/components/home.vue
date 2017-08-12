@@ -1,9 +1,9 @@
 <style scoped>
     .layout {
         border: 1px solid #d7dde4;
-        background: #f5f7f9;
         position: relative;
         border-radius: 4px;
+        overflow:hidden;
     }
 
     .layout-breadcrumb {
@@ -36,7 +36,9 @@
     .layout-menu-left {
         background: #464c5b;
     }
-
+    .layout-menu-right {
+        background: #f5f7f9;
+    }
     .layout-header {
         height: 60px;
         background: #fff;
@@ -62,11 +64,15 @@
     .ivu-col {
         transition: width .2s ease-in-out;
     }
+    .height100
+    {
+        height:100%;
+    }
 
 </style>
 <template>
-    <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
-        <Row type="flex" style="height:100%;">
+    <div class="layout height100" :class="{'layout-hide-text': spanLeft < 5}">
+        <Row type="flex" class="height100">
             <i-col :span="spanLeft" class="layout-menu-left">
                 <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']" @on-select="route">
                     <div class="layout-logo-left"></div>
@@ -103,21 +109,24 @@
                     </Submenu>
                 </Menu>
             </i-col>
-            <i-col :span="spanRight" style="min-height:100%;">
+            <i-col :span="spanRight" class="layout-menu-right height100" style="overflow:scroll;">
+                 <div style="position:fixed;width:100%;">
+                        <div class="layout-header">
+                            <i-button type="text" @click="toggleClick">
+                                <Icon type="navicon" size="32"></Icon>
+                            </i-button>
+                        </div>
+                        <div class="layout-breadcrumb">
+                            <Breadcrumb>
+                                <Breadcrumb-item href="#">首页</Breadcrumb-item>
+                                <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
+                                <Breadcrumb-item>某应用</Breadcrumb-item>
+                            </Breadcrumb>
+                        </div>
+                    </div>
                 <div style="min-height:100%;">
-                    <div class="layout-header">
-                        <i-button type="text" @click="toggleClick">
-                            <Icon type="navicon" size="32"></Icon>
-                        </i-button>
-                    </div>
-                    <div class="layout-breadcrumb">
-                        <Breadcrumb>
-                            <Breadcrumb-item href="#">首页</Breadcrumb-item>
-                            <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
-                            <Breadcrumb-item>某应用</Breadcrumb-item>
-                        </Breadcrumb>
-                    </div>
-                    <div class="layout-content">
+                   <div style="height:120px;"></div>
+                    <div class="layout-content" >
                         <div class="layout-content-main">
                             <router-view></router-view>
                         </div>
@@ -163,8 +172,8 @@
         methods: {
             toggleClick() {
                 if (this.spanLeft === 5) {
-                    this.spanLeft = 1;
-                    this.spanRight = 21;
+                    this.spanLeft = 2;
+                    this.spanRight = 22;
                 } else {
                     this.spanLeft = 5;
                     this.spanRight = 19;
