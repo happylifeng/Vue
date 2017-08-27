@@ -5,6 +5,8 @@ import weather from '@/components/grid/weather'
 import hello from '@/components/hello'
 import long from '@/components/grid/long'
 import home2 from '@/components/home2'
+import grid from '@/components/grid/grid'
+import multifield from '@/components/grid/multifield'
 
 Vue.use(Router)
 
@@ -27,6 +29,14 @@ export default new Router({
         {
           path:'/long',
           component:long
+        },
+        {
+          path:'/grid',
+          component:grid
+        },
+        {
+          path:'/multifield',
+          component:multifield
         }
       ]
     },

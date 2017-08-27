@@ -99,6 +99,12 @@
                         <Menu-item name="1-3" class="layout-text">
                             这是一个很长的页面
                         </Menu-item>
+                         <Menu-item name="1-4" class="layout-text">
+                            多条件自适应页
+                        </Menu-item>
+                         <Menu-item name="1-5" class="layout-text">
+                            列表查询页
+                        </Menu-item>
                     </Submenu>
                     <Submenu name="2">
                         <template slot="title">
@@ -187,6 +193,8 @@
                 routes["1-1"] = "/hello";
                 routes["1-2"] = "/weather";
                 routes["1-3"] = "/long";
+                routes["1-4"] = "/multifield";
+                routes["1-5"] = "/grid";
                 this.$router.push(routes[name]);
             }
         }
