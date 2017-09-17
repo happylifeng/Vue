@@ -23,6 +23,11 @@
             <Row justify="space-around">
                 <Col>
                     <Table border :columns="tableModel.columns" :data="tableModel.data"></Table>
+                    <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+            <Page :total="100" :current="1" @on-change="changePage" show-total></Page>
+        </div>
+    </div>
                 </Col>
             </Row>
         </Form>
@@ -37,11 +42,11 @@
                     name: ''
                 },
                 ruleValidate: {
-                    cityname: [
+                    name: [
                         { required: true, message: '名称不能为空', trigger: 'blur' }
                     ]
                 },
-                title: "多条件自适应页",
+                title: "列表查询页",
                 tableModel: {
                     columns: [
                         {
@@ -50,11 +55,11 @@
                         },
                         {
                             title: '年龄',
-                            key: 'desc'
+                            key: 'age'
                         },
                         {
                             title: '城市',
-                            key: 'value'
+                            key: 'city'
                         }
                     ],
                     data: [
@@ -65,6 +70,25 @@
         },
         components: {
             toptitle
+        },
+        methods:{
+            handleSubmit(name) {
+                this.$refs[name].validate((valid) => {
+                    if(valid){
+                        this.$http.get("static/data/grid.json", this.formValidate).then(function (response) {
+                            var json = response.body;
+                            this.tableModel.data=json;
+                        });
+                    }
+                    else{
+                        this.$Message.error('表单验证失败!');
+                    }
+
+                });
+            },changePage:function(page,size){
+                
+                this.$Message.success(JSON.stringify(page));
+            }
         }
     }
 
